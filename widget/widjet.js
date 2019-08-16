@@ -926,11 +926,13 @@ function ISDEKWidjet(params) {
 			courier: {
 				price: 0,
 				term: 0,
+				termOriginal: 0,
 				tarif: false
 			},
 			pickup: {
 				price: 0,
 				term: 0,
+				termOriginal: 0,
 				tarif: false
 			}
 		},
@@ -1015,10 +1017,12 @@ function ISDEKWidjet(params) {
 
 				CALCULATION.bad = false;
 				CALCULATION.profiles[answer.type].price = answer.result.price;
+				CALCULATION.profiles[answer.type].termOriginal = (answer.result.deliveryPeriodMax === answer.result.deliveryPeriodMin) ? answer.result.deliveryPeriodMin : answer.result.deliveryPeriodMin + "-" + answer.result.deliveryPeriodMax;
+
 				if (answer.result.deliveryPeriodMin < 6) {
-					CALCULATION.profiles[answer.type].term = (answer.result.deliveryPeriodMax === answer.result.deliveryPeriodMin) ? answer.result.deliveryPeriodMin : answer.result.deliveryPeriodMin + "-" + answer.result.deliveryPeriodMax;
+					CALCULATION.profiles[answer.type].term = CALCULATION.profiles[answer.type].termOriginal + " раб. дн.";
 				} else {
-					CALCULATION.profiles[answer.type].term = "?";
+					CALCULATION.profiles[answer.type].term = "срок необходимо уточнить по телефону";
 				}
 				CALCULATION.profiles[answer.type].tarif = typeof answer.result.tarif != 'undefined' ? answer.result.tarif : answer.result.tariffId;
 			}
@@ -1265,7 +1269,8 @@ function ISDEKWidjet(params) {
 
 								_tmpBlock = HTML.getBlock('d_' + i, {
 									"SUMM": obPrices[i].price === null ? LANG.get('COUNTING') : obPrices[i].price,
-									"TIME": obPrices[i].term === null ? '' : obPrices[i].term
+									"TIME": obPrices[i].term === null ? '' : obPrices[i].term,
+									"TIME-DAY": obPrices[i].term === null ? '' : obPrices[i].term
 								});
 
 								ipjq(IDS.get('cdek_delivery_types')).append(_tmpBlock);
@@ -1353,6 +1358,7 @@ function ISDEKWidjet(params) {
 					'PVZ': PVZ[id],
 					'price': CALCULATION.profiles.pickup.price,
 					'term': CALCULATION.profiles.pickup.term,
+					'termOriginal': CALCULATION.profiles.pickup.termOriginal,
 					'tarif': CALCULATION.profiles.pickup.tarif,
 					'city': DATA.city.current,
                     'cityName': DATA.city.getName(DATA.city.current)
@@ -1369,6 +1375,7 @@ function ISDEKWidjet(params) {
                     'cityName': DATA.city.getName(DATA.city.current),
 					'price': CALCULATION.profiles.courier.price,
 					'term': CALCULATION.profiles.courier.term,
+					'termOriginal': CALCULATION.profiles.courier.termOriginal,
 					'tarif': CALCULATION.profiles.courier.tarif
 				});
 
