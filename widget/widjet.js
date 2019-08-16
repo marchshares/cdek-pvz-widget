@@ -1015,7 +1015,11 @@ function ISDEKWidjet(params) {
 
 				CALCULATION.bad = false;
 				CALCULATION.profiles[answer.type].price = answer.result.price;
-				CALCULATION.profiles[answer.type].term = (answer.result.deliveryPeriodMax === answer.result.deliveryPeriodMin) ? answer.result.deliveryPeriodMin : answer.result.deliveryPeriodMin + "-" + answer.result.deliveryPeriodMax;
+				if (answer.result.deliveryPeriodMin < 6) {
+					CALCULATION.profiles[answer.type].term = (answer.result.deliveryPeriodMax === answer.result.deliveryPeriodMin) ? answer.result.deliveryPeriodMin : answer.result.deliveryPeriodMin + "-" + answer.result.deliveryPeriodMax;
+				} else {
+					CALCULATION.profiles[answer.type].term = "?";
+				}
 				CALCULATION.profiles[answer.type].tarif = typeof answer.result.tarif != 'undefined' ? answer.result.tarif : answer.result.tariffId;
 			}
 

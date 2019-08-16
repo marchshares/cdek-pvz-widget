@@ -2,8 +2,10 @@
 header('Access-Control-Allow-Origin: *');
 error_reporting(0);
 ISDEKservice::setTarifPriority(
-	array(233, 137, 139, 16, 18, 11, 1, 3, 61, 60, 59, 58, 57, 83),
-    array(234, 136, 138, 15, 17, 10, 12, 5, 62, 63)
+//	array(233, 137, 139, 16, 18, 11, 1, 3, 61, 60, 59, 58, 57, 83),
+//    array(234, 136, 138, 15, 17, 10, 12, 5, 62, 63)
+	array(233, 137, 11, 139, 1),
+    array(234, 136, 10, 138, 12)
 );
 
 $action = $_REQUEST['isdek_action'];
@@ -14,8 +16,8 @@ if (method_exists('ISDEKservice', $action)) {
 class ISDEKservice
 {
 	// auth
-	protected static $account = false; //укажите логин
-	protected static $key     = false; //укажите ключ
+	protected static $account = "6e65359283f627fda1596f43559d2755";
+	protected static $key     = "27f043123d5b57e604391a3966c7537b";
 	
 
 	protected static $tarifPriority = false;
