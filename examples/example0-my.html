@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пример работы виджета ПВЗ</title>
+    <script type="text/javascript" id="ISDEKscript" src="../widget/widjet.js"></script>
+    <!--script type="text/javascript" src="https://www.cdek.ru/website/edostavka/template/js/widjet.js" id="ISDEKscript" ></script-->
+</head>
+<body>
+<script type="text/javascript">
+    let apikey = 'aa735970-60bf-4090-b32d-083b360acd6f';
+    let cdekPvzWidgetScriptsPath = 'https://8bars.000webhostapp.com/cdek-pvz-widget/widget/scripts/';
+
+    var widjet = new ISDEKWidjet({
+        hidedress: true,
+        choose: false,
+        link: 'forpvz',
+        defaultCity: 'auto',
+        cityFrom: 'Москва',
+        path: cdekPvzWidgetScriptsPath,
+        // path: 'https://www.cdek.ru/website/edostavka/template/scripts/',
+        // servicepath: 'https://www.cdek.ru/website/edostavka/template/scripts/service.php',
+        // templatepath: 'https://www.cdek.ru/website/edostavka/template/scripts/template.php',
+        goods: [ // установим данные о товарах из корзины
+            { length : 10, width : 10, height : 10, weight : 0.5 }
+        ],
+        apikey: apikey,
+    });
+</script>
+
+<p>Пример локальной установки виджета</p>
+<div id="forpvz" style="height:600px;"></div>
+
+</body>
+</html>

@@ -596,7 +596,16 @@ function ISDEKWidjet(params) {
 				},
 				setting: 'dataLoaded',
 				hint: 'City From wasn\'t founded'
-			}
+			},
+
+			apikey: {
+				value: params.apikey,
+				check: function (wat) {
+					return (typeof(wat) === 'string');
+				},
+				setting: 'start',
+				hint: 'Value must be string (apikey)'
+			},
 		},
 		events: [
 			'onChoose',
@@ -614,8 +623,14 @@ function ISDEKWidjet(params) {
 				},
 				function: function () {
 					this.service.loadTag(this.options.get('path') + "ipjq.js", 'script', loaders.onIPJQLoad);
+
 					var yalang = (this.options.get('lang') == 'rus') ? 'ru_RU' : 'en_GB';
-					this.service.loadTag("https://api-maps.yandex.ru/2.1.66/?lang="+yalang, 'script', loaders.onYmapsLoad);
+					let ymapsApiUrl = "https://api-maps.yandex.ru/2.1.66/?lang="+yalang;
+					if (this.options.get('apikey')) {
+						ymapsApiUrl += "&apikey=" + this.options.get('apikey');
+					}
+
+					this.service.loadTag(ymapsApiUrl, 'script', loaders.onYmapsLoad);
 					this.service.loadTag(this.options.get('path') + 'style.css', 'link', loaders.onStylesLoad);
 
 				}
