@@ -16,8 +16,8 @@ if (method_exists('ISDEKservice', $action)) {
 class ISDEKservice
 {
 	// auth
-	protected static $account = "6e65359283f627fda1596f43559d2755";
-	protected static $key     = "27f043123d5b57e604391a3966c7537b";
+	protected static $account = "";
+	protected static $key     = "";
 	
 
 	protected static $tarifPriority = false;
